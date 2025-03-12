@@ -10,6 +10,11 @@ xcode-select --install
 sh <(curl -L https://nixos.org/nix/install)
 ```
 
+### Tmux Plugin Manager
+```sh
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
 ## Installation
 ### Dotfiles
 Copy `.dotfiles` onto local system using GNU Stow
