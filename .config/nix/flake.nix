@@ -53,6 +53,7 @@
 	];
 	finder.FXPreferredViewStyle = "clmv";
 	loginwindow.GuestEnabled = false;
+	controlcenter.Sound = true;
       };
 
       # Necessary for using flakes on this system.
