@@ -24,6 +24,7 @@
 	  pkgs.stow
 	  pkgs.tmux
 	  pkgs.neovim
+    pkgs.mise
 
 	  # Web Tools
 	  pkgs.brave
