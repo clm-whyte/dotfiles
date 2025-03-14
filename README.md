@@ -38,3 +38,10 @@ darwin-rebuild switch --flake ~/.config/nix
 ```sh
 git clone -b v2.0 https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 ```
+
+### Tmux Plugins
+_prefix currently set to `CTRL` + `SPACE`_
+
+Open `tmux`
+
+Press `prefix` + `I` (capital i, as in Install) to fetch the plugin
