@@ -25,6 +25,12 @@
 	  pkgs.tmux
 	  pkgs.neovim
     pkgs.mise
+    pkgs.eza
+    pkgs.bat
+    pkgs.zoxide
+    pkgs.fzf
+    pkgs.silver-searcher
+    pkgs.tldr
 
 	  # Web Tools
 	  pkgs.brave
