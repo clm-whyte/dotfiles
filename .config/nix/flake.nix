@@ -44,7 +44,12 @@
 	casks = [
 	  "ghostty"
 	  "google-drive"
+    "iina"
+    "the-unarchiver"
 	];
+  masApps = {
+    "GarageBand" = 682658836;
+  };
 	onActivation.cleanup = "zap";
 	onActivation.autoUpdate = true;
 	onActivation.upgrade = true;
