@@ -6,8 +6,7 @@
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     mac-app-util.url = "github:hraban/mac-app-util";
-    # nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-    nix-homebrew.url = "git+https://github.com/zhaofengli/nix-homebrew?ref=refs/pull/71/merge";
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, nix-homebrew, ... }:
@@ -30,7 +29,6 @@
     pkgs.bat
     pkgs.zoxide
     pkgs.fzf
-    pkgs.silver-searcher
     pkgs.tldr
 
 	  # Web Tools
@@ -47,6 +45,7 @@
 	  "google-drive"
     "iina"
     "the-unarchiver"
+    "notion"
 	];
   masApps = {
     "GarageBand" = 682658836;
