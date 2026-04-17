@@ -7,6 +7,9 @@ alias update="softwareupdate -ia && cd ~/.dotfiles/.config/nix/ && nix flake upd
 # Activate Mise
 eval "$(mise activate zsh)"
 
+# Grafana integrations
+alias grafana-cli='grafana cli --homepath /opt/homebrew/opt/grafana/share/grafana/'
+
 # Setup zoxide
 eval "$(zoxide init zsh)"
 
