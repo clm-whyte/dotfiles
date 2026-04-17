@@ -20,38 +20,37 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
         [
-	  # Command Line Tools
-	  pkgs.starship
-	  pkgs.git
-	  pkgs.stow
-	  pkgs.tmux
-	  pkgs.neovim
-    pkgs.mise
-    pkgs.eza
-    pkgs.bat
-    pkgs.zoxide
-    pkgs.fzf
-    pkgs.tldr
-
-	  # Web Tools
-	  pkgs.brave
-
-	  # Organisation Tools
-	  pkgs.obsidian
+        # Command Line Toolspkgs
+        pkgs.starship
+	      pkgs.git
+	      pkgs.stow
+	      pkgs.tmux
+	      pkgs.neovim
+        pkgs.mise
+        pkgs.eza
+        pkgs.bat
+        pkgs.zoxide
+        pkgs.fzf
+        pkgs.tldr
         ];
       
       homebrew = {
         enable = true;
-	casks = [
+	brews = [
+    "grafana"
+    "podman"
+    "podman-compose"
+  ];
+
+  casks = [
 	  "ghostty"
 	  "google-drive"
     "iina"
     "the-unarchiver"
     "notion"
+    "brave-browser"
+    "obsidian"
 	];
-  masApps = {
-    "GarageBand" = 682658836;
-  };
 	onActivation.cleanup = "zap";
 	onActivation.autoUpdate = true;
 	onActivation.upgrade = true;
@@ -61,9 +60,9 @@
         dock.autohide = true;
 	dock.show-recents = false;
 	dock.persistent-apps = [
-	  "${pkgs.brave}/Applications/Brave Browser.app"
+	  "/Applications/Brave Browser.app"
 	  "/Applications/Ghostty.app"
-	  "${pkgs.obsidian}/Applications/Obsidian.app"
+	  "/Applications/Obsidian.app"
 	];
 	finder.FXPreferredViewStyle = "clmv";
 	loginwindow.GuestEnabled = false;
