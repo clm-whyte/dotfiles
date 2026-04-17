@@ -9,106 +9,117 @@
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, mac-app-util, nix-homebrew, ... }:
-  let
-    configuration = { pkgs, ... }: {
-      nixpkgs.config.allowUnfree = true;
+  outputs =
+    inputs@{
+      self,
+      nix-darwin,
+      nixpkgs,
+      mac-app-util,
+      nix-homebrew,
+      ...
+    }:
+    let
+      configuration =
+        { pkgs, ... }:
+        {
+          nixpkgs.config.allowUnfree = true;
 
-      system.primaryUser = "calum";
+          system.primaryUser = "calum";
 
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [
-        # Command Line Toolspkgs
-        pkgs.starship
-	      pkgs.git
-	      pkgs.stow
-	      pkgs.tmux
-	      pkgs.neovim
-        pkgs.mise
-        pkgs.eza
-        pkgs.bat
-        pkgs.zoxide
-        pkgs.fzf
-        pkgs.tldr
-        ];
-      
-      homebrew = {
-        enable = true;
-	brews = [
-    "grafana"
-    "podman"
-    "podman-compose"
-  ];
+          # List packages installed in system profile. To search by name, run:
+          # $ nix-env -qaP | grep wget
+          environment.systemPackages = [
+            # Command Line Toolspkgs
+            pkgs.starship
+            pkgs.git
+            pkgs.stow
+            pkgs.tmux
+            pkgs.neovim
+            pkgs.nixfmt
+            pkgs.mise
+            pkgs.eza
+            pkgs.bat
+            pkgs.zoxide
+            pkgs.fzf
+            pkgs.tldr
+          ];
 
-  casks = [
-	  "ghostty"
-	  "google-drive"
-    "iina"
-    "the-unarchiver"
-    "notion"
-    "brave-browser"
-    "obsidian"
-	];
-	onActivation.cleanup = "zap";
-	onActivation.autoUpdate = true;
-	onActivation.upgrade = true;
-      };
-
-      system.defaults = {
-        dock.autohide = true;
-	dock.show-recents = false;
-	dock.persistent-apps = [
-	  "/Applications/Brave Browser.app"
-	  "/Applications/Ghostty.app"
-	  "/Applications/Obsidian.app"
-	];
-	finder.FXPreferredViewStyle = "clmv";
-	loginwindow.GuestEnabled = false;
-	controlcenter.Sound = true;
-      };
-
-      # Necessary for using flakes on this system.
-      nix.settings.experimental-features = "nix-command flakes";
-
-      # Enable alternative shell support in nix-darwin.
-      # programs.fish.enable = true;
-
-      # Set Git commit hash for darwin-version.
-      system.configurationRevision = self.rev or self.dirtyRev or null;
-
-      # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
-      system.stateVersion = 6;
-
-      # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
-    };
-  in
-  {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#Calums-MacBook-Pro
-    darwinConfigurations."Calums-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      modules = [
-        configuration
-	mac-app-util.darwinModules.default
-	nix-homebrew.darwinModules.nix-homebrew
-	{
-	  nix-homebrew = {
-	    # Install Homebrew under the default prefix
+          homebrew = {
             enable = true;
+            brews = [
+              "grafana"
+              "podman"
+              "podman-compose"
+            ];
 
-            # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-            enableRosetta = true;
+            casks = [
+              "ghostty"
+              "google-drive"
+              "iina"
+              "the-unarchiver"
+              "notion"
+              "brave-browser"
+              "obsidian"
+              "visual-studio-code"
+            ];
+            onActivation.cleanup = "zap";
+            onActivation.autoUpdate = true;
+            onActivation.upgrade = true;
+          };
 
-            # User owning the Homebrew prefix
-            user = "calum";
+          system.defaults = {
+            dock.autohide = true;
+            dock.show-recents = false;
+            dock.persistent-apps = [
+              "/Applications/Brave Browser.app"
+              "/Applications/Ghostty.app"
+              "/Applications/Obsidian.app"
+            ];
+            finder.FXPreferredViewStyle = "clmv";
+            loginwindow.GuestEnabled = false;
+            controlcenter.Sound = true;
+          };
 
-	    autoMigrate = true;
-	  };
-	}
-      ];
+          # Necessary for using flakes on this system.
+          nix.settings.experimental-features = "nix-command flakes";
+
+          # Enable alternative shell support in nix-darwin.
+          # programs.fish.enable = true;
+
+          # Set Git commit hash for darwin-version.
+          system.configurationRevision = self.rev or self.dirtyRev or null;
+
+          # Used for backwards compatibility, please read the changelog before changing.
+          # $ darwin-rebuild changelog
+          system.stateVersion = 6;
+
+          # The platform the configuration will be used on.
+          nixpkgs.hostPlatform = "aarch64-darwin";
+        };
+    in
+    {
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#Calums-MacBook-Pro
+      darwinConfigurations."Calums-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+        modules = [
+          configuration
+          mac-app-util.darwinModules.default
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              # Install Homebrew under the default prefix
+              enable = true;
+
+              # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
+              enableRosetta = true;
+
+              # User owning the Homebrew prefix
+              user = "calum";
+
+              autoMigrate = true;
+            };
+          }
+        ];
+      };
     };
-  };
 }
