@@ -61,6 +61,7 @@
               "brave-browser"
               "obsidian"
               "visual-studio-code"
+              "steam"
             ];
             onActivation.cleanup = "zap";
             onActivation.autoUpdate = true;
