@@ -2,8 +2,8 @@
   description = "Calum Darwin system flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
+    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     mac-app-util.url = "github:hraban/mac-app-util";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
@@ -23,7 +23,9 @@
         { pkgs, ... }:
         {
           nixpkgs.config.allowUnfree = true;
-
+          
+          documentation.enable = false;
+          
           system.primaryUser = "calum";
 
           # List packages installed in system profile. To search by name, run:
@@ -53,6 +55,7 @@
             ];
 
             casks = [
+              "copilot-cli"
               "ghostty"
               "google-drive"
               "iina"
