@@ -57,7 +57,6 @@
             casks = [
               "copilot-cli"
               "ghostty"
-              "google-drive"
               "iina"
               "the-unarchiver"
               "notion"
