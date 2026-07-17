@@ -56,6 +56,7 @@
 
             casks = [
               "copilot-cli"
+              "discord"
               "ghostty"
               "iina"
               "the-unarchiver"
