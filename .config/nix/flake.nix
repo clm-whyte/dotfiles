@@ -65,6 +65,8 @@
               "obsidian"
               "visual-studio-code"
               "steam"
+              "spotify"
+              "miro"
             ];
             onActivation.cleanup = "zap";
             onActivation.autoUpdate = true;
@@ -78,6 +80,8 @@
               "/Applications/Brave Browser.app"
               "/Applications/Ghostty.app"
               "/Applications/Obsidian.app"
+              "/Applications/Spotify.app"
+              "/Applications/Miro.app"
             ];
             finder.FXPreferredViewStyle = "clmv";
             loginwindow.GuestEnabled = false;
