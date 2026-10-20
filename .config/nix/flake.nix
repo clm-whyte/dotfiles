@@ -30,7 +30,8 @@
 
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
-          environment.systemPackages = [
+          users.users.calum.home = "/Users/calum";
+          users.users.calum.packages = [
             # Command Line Toolspkgs
             pkgs.starship
             pkgs.git
@@ -48,6 +49,7 @@
 
           homebrew = {
             enable = true;
+            caskArgs.appdir = "/Users/calum/Applications";
             brews = [
               "grafana"
               "podman"
@@ -57,6 +59,7 @@
             casks = [
               "copilot-cli"
               "discord"
+              "ente"
               "ghostty"
               "iina"
               "the-unarchiver"
@@ -68,7 +71,10 @@
               "spotify"
               "miro"
             ];
-            onActivation.cleanup = "zap";
+            # TODO: restore "zap" once nix-darwin supports Homebrew >=4.6,
+            # which removed the `brew bundle --cleanup` switch (see
+            # https://github.com/LnL7/nix-darwin/issues after Homebrew 4.6.0).
+            onActivation.cleanup = "none";
             onActivation.autoUpdate = true;
             onActivation.upgrade = true;
           };
@@ -77,11 +83,11 @@
             dock.autohide = true;
             dock.show-recents = false;
             dock.persistent-apps = [
-              "/Applications/Brave Browser.app"
-              "/Applications/Ghostty.app"
-              "/Applications/Obsidian.app"
-              "/Applications/Spotify.app"
-              "/Applications/Miro.app"
+              "/Users/calum/Applications/Brave Browser.app"
+              "/Users/calum/Applications/Ghostty.app"
+              "/Users/calum/Applications/Obsidian.app"
+              "/Users/calum/Applications/Spotify.app"
+              "/Users/calum/Applications/Miro.app"
             ];
             finder.FXPreferredViewStyle = "clmv";
             loginwindow.GuestEnabled = false;
@@ -111,7 +117,7 @@
       darwinConfigurations."Calums-MacBook-Pro" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
-          mac-app-util.darwinModules.default
+          # mac-app-util.darwinModules.default # disabled: SBCL heap allocation failure on macOS 27
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
