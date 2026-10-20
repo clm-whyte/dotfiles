@@ -5,7 +5,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
     nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    mac-app-util.url = "github:hraban/mac-app-util";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
@@ -14,7 +13,6 @@
       self,
       nix-darwin,
       nixpkgs,
-      mac-app-util,
       nix-homebrew,
       ...
     }:
@@ -32,7 +30,7 @@
           # $ nix-env -qaP | grep wget
           users.users.calum.home = "/Users/calum";
           users.users.calum.packages = [
-            # Command Line Toolspkgs
+            # Command Line Tools
             pkgs.starship
             pkgs.git
             pkgs.stow
@@ -117,7 +115,6 @@
       darwinConfigurations."Calums-MacBook-Pro" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
-          # mac-app-util.darwinModules.default # disabled: SBCL heap allocation failure on macOS 27
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
